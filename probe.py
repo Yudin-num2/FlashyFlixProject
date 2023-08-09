@@ -1,30 +1,19 @@
 
 from moviepy.editor import *
 from moviepy.video.fx.colorx import colorx
-from moviepy.video.fx.rotate import rotate
+from moviepy.video.fx.crop import crop
 from moviepy.audio.fx.volumex import volumex
-from cv2 import VideoCapture
-import cv2
 
-address_video = '07_08_2023  11_20_01.mp4'
+address_video = '07-08-2023-11-20-01_kWeEsLA7.mp4'
 
 
-def size(address):
-    print(os.getcwd())
-    # os.chdir('video')
-    vid = VideoCapture(address)
-    height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
-    width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
-    return [height, width]
-
-
-def watermark(address, height, width):
+def watermark(address):
 
     os.chdir('video/')
     video_address = address
     video_without_watermark = VideoFileClip(video_address)
-    video_without_watermark = video_without_watermark.fx(volumex, 2)\
-                                                     # .fx(rotate(angle=angle(5))
+    video_without_watermark = colorx(video_without_watermark, 1.3)
+    video_without_watermark = crop(video_without_watermark, y2=-40)
     logo = ImageClip(r'C:\Users\i.sysoev\PycharmProjects\FlashyFlixProject\Logo.png') \
         .set_duration(video_without_watermark.duration) \
         .resize(height=100) \
@@ -33,4 +22,4 @@ def watermark(address, height, width):
     video_with_watermark.write_videofile(f'out_video_{video_address}')
 
 
-watermark(address_video, size(address_video)[0], size(address_video)[1])
+watermark(address_video)
