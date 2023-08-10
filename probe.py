@@ -1,4 +1,4 @@
-
+import os
 from moviepy.editor import *
 from moviepy.video.fx.colorx import colorx
 from moviepy.video.fx.crop import crop
@@ -22,4 +22,36 @@ def watermark(address):
     video_with_watermark.write_videofile(f'out_video_{video_address}')
 
 
-watermark(address_video)
+# watermark(address_video)
+
+
+def audio(address):
+    file_address = address
+    video = VideoFileClip(file_address)
+    new_video = video.fx(volumex, 1.5)
+    name = file_address.split('/')[-1]
+    new_video.write_videofile(f'{name}_volumex.mp4')
+
+
+# audio(r'C:\Users\i.sysoev\PycharmProjects\FlashyFlixProject\video\Summer.mp4')
+
+
+def mute(name_of_file):
+    file_address = f'video/{name_of_file}'
+    video = VideoFileClip(file_address)
+    video.without_audio().write_videofile(f'{name_of_file}_mute.mp4')
+
+
+# mute('ASMR.mp4')
+
+
+def add_music():
+    video = VideoFileClip(os.path.join('video', 'ASMR.mp4_mute.mp4'))
+    audio = AudioFileClip('Audio/1.mp3').set_duration(video.duration)
+    video.set_audio(audio).write_videofile('ASMR.mp4')
+
+add_music()
+
+
+
+
