@@ -4,7 +4,7 @@ from moviepy.video.fx.colorx import colorx
 from moviepy.video.fx.crop import crop
 from moviepy.audio.fx.volumex import volumex
 
-address_video = '07-08-2023-11-20-01_kWeEsLA7.mp4'
+address_video = 'out_video_aaa.mp4'
 
 
 def watermark(address):
@@ -13,16 +13,16 @@ def watermark(address):
     video_address = address
     video_without_watermark = VideoFileClip(video_address)
     video_without_watermark = colorx(video_without_watermark, 1.3)
-    video_without_watermark = crop(video_without_watermark, y2=-40)
+    # video_without_watermark = crop(video_without_watermark, y2=-40)
     logo = ImageClip(r'C:\Users\i.sysoev\PycharmProjects\FlashyFlixProject\Logo.png') \
         .set_duration(video_without_watermark.duration) \
         .resize(height=100) \
         .set_pos('top', 'center')
     video_with_watermark = CompositeVideoClip([video_without_watermark, logo])
-    video_with_watermark.write_videofile(f'out_video_{video_address}')
+    video_with_watermark.write_videofile(f'watermark_aaa.mp4')
 
 
-# watermark(address_video)
+watermark(address_video)
 
 
 def audio(address):
@@ -50,8 +50,15 @@ def add_music():
     audio = AudioFileClip('Audio/1.mp3').set_duration(video.duration)
     video.set_audio(audio).write_videofile('ASMR.mp4')
 
-add_music()
+
+# add_music()
+
+def sub():
+    video = VideoFileClip(r'video\Summer.mp4')
+    new_video = video.subclip(830, 14420)
+    new_video.write_videofile(f'subclip_Summer.mp4')
 
 
+# sub()
 
 

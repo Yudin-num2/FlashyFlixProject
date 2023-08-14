@@ -79,7 +79,7 @@ def watermark(message):
         video_without_watermark = VideoFileClip(video_address)
         logo = ImageClip(r'C:\Users\i.sysoev\PycharmProjects\FlashyFlixProject\Logo.png') \
             .set_duration(video_without_watermark.duration) \
-            .resize(height=150) \
+            .resize(height=200) \
             .set_pos('top', 'center')
         bot.send_message(message.from_user.id, 'Выполняю...')
         video_with_watermark = CompositeVideoClip([video_without_watermark, logo])
@@ -136,7 +136,7 @@ def delete2(message):
         bot.send_message(message.from_user.id, str(e))
 
 
-@bot.message_handler(commands=['getFile'])
+@bot.message_handler(commands=['getfile'])
 def send_file(message):
     try:
         ls_la(message)
