@@ -22,7 +22,7 @@ def watermark(address):
     video_with_watermark.write_videofile(f'watermark_aaa.mp4')
 
 
-watermark(address_video)
+# watermark(address_video)
 
 
 def audio(address):
@@ -53,12 +53,13 @@ def add_music():
 
 # add_music()
 
-def sub():
-    video = VideoFileClip(r'video\Summer.mp4')
-    new_video = video.subclip(830, 14420)
-    new_video.write_videofile(f'subclip_Summer.mp4')
+def sub(address):
+    video = VideoFileClip(address)
+    new_video = video.subclip(0, 60)
+    name = address.split('/')[-1]
+    new_video.write_videofile(f'subclip_{name}.mp4')
 
 
-# sub()
+sub('video/растяжка.mp4')
 
 
